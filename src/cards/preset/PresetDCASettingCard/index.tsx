@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { Box, CardContent } from "@mui/material";
+import { useAtom } from "jotai";
 
 import Card from "@/cards/Card";
 import CardButton from "@/cards/CardButton";
@@ -8,6 +9,7 @@ import CardFooter from "@/cards/CardFooter";
 import CardHeader from "@/cards/CardHeader";
 import CustomTab from "@/components/tab/CustomTab";
 import CustomTabs from "@/components/tab/CustomTabs";
+import { presetDCAAtom } from "@/datas/preset";
 
 import DetailSettingPanel from "./DetailSettingPanel";
 import SimpleSettingPanel from "./SimpleSettingPanel";
@@ -21,14 +23,15 @@ function a11yProps(index: number) {
 
 export default function PresetDCASettingCard() {
   const [value, setValue] = useState(0);
-
+  const [preset, setPreset] = useAtom(presetDCAAtom);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+    setPreset({ ...preset, dcaSetting: newValue as number });
   };
 
   return (
     <Card sx={{ maxWidth: 768 }}>
-      <CardHeader id="setting" title="프리셋 설정" subtitle="하락장 세팅이 선택되었습니다." />
+      <CardHeader id="setting" title="프리셋 설정" subtitle={preset?.presetName} />
       <CardContent>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <CustomTabs value={value} onChange={handleChange}>

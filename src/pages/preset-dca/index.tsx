@@ -5,6 +5,7 @@ import { Box, Stack } from "@mui/material";
 import PresetDCAGuideCard from "@/cards/preset/PresetDCAGuideCard";
 import PresetDCAIndicatorInfoCard from "@/cards/preset/PresetDCAIndicatorInfoCard";
 import PresetDCASettingCard from "@/cards/preset/PresetDCASettingCard";
+import NotConnectCard from "@/cards/preset/PresetDCASettingCard/NotConnectCard";
 import PresetInfoCard from "@/cards/preset/PresetInfoCard/index";
 import { useUserExchangesQuery } from "@/hooks/query/useApiConnection";
 import Carousel from "@/layouts/Carousel/index";
@@ -30,7 +31,7 @@ function PresetDCA() {
           </Box>
 
           <Box className="h-full w-1/4">
-            <PresetDCASettingCard />
+            {isConnected === true ? <PresetDCASettingCard /> : <NotConnectCard />}
           </Box>
           <Stack className="w-2/4 gap-4">
             <Box className="w-full">
